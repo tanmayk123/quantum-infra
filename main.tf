@@ -34,9 +34,9 @@ resource "aws_route" "quantum_route_public" {
   gateway_id             = aws_internet_gateway.quantum-igw.id
 }
 
-resource "aws_route_table_association" "quantus_rt_assoc" {
+resource "aws_route_table_association" "quantum_rt_assoc" {
   route_table_id = aws_route_table.quantum_route_public_table.id
-  subnet_id      = aws_subnet.quantum-public-subnet
+  subnet_id      = aws_subnet.quantum-public-subnet.id
 }
 
 # This creates the aws security groups
