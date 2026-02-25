@@ -10,7 +10,7 @@ resource "aws_subnet" "quantum-public-subnet" {
   vpc_id                  = aws_vpc.quantum-vpc.id
   cidr_block              = "10.0.1.0/24"
   map_public_ip_on_launch = true
-  availability_zone       = var.aws_AZ
+  availability_zone       = var.aws_region
   tags = {
     Name = "quantum-public-subnet"
   }
@@ -74,10 +74,13 @@ resource "aws_instance" "quantum-web-ec2" {
   security_groups = [aws_security_group.quantus_sg.id]
 
   user_data = <<-EOF
-                #!/bin/bash
-                yum update -y
-                yum install java-17-openjdk -y
-                cd /opt/
+                #!/bin/bash              
+                
+                dnf install java-17-amazon-corretto -y
+                
+                export JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto.x86_64
+                
+                cd /opt
                 wget https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.85/bin/apache-tomcat-9.0.85.tar.gz
                 tar -xvzf apache-tomcat-9.0.85.tar.gz
                 chmod +x apache-tomcat-9.0.85/bin/*.sh
