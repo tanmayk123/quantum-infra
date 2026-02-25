@@ -24,7 +24,10 @@ jobs:
                   aws-region: eu-west-1
 
             - name: Terraform Init
-              run: terraform init
+              run: terraform init -reconfigure
 
-            - name: Terraform Apply
-              run: terraform apply -auto-approve
+            - name: Terraform Plan
+              run: terraform plan
+
+            #   - name: Terraform Apply
+            #      run: terraform apply -auto-approve
