@@ -100,7 +100,7 @@ resource "aws_s3_bucket" "quantam-app-war" {
 }
 
 resource "aws_s3_bucket_public_access_block" "quantam-app-war" {
-  bucket = aws_s3_bucket.quantam-app-war
+  bucket = aws_s3_bucket.quantam-app-war.id
 
   block_public_acls       = true
   block_public_policy     = true
