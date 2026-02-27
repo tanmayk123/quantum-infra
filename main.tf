@@ -91,3 +91,20 @@ resource "aws_instance" "quantum-web-ec2" {
   }
 
 }
+
+resource "aws_s3_bucket" "quantam-app-war" {
+  bucket = "quantam-app-war"
+  tags = {
+    name = "quantam-app-war"
+  }
+}
+
+resource "aws_s3_bucket_public_access_block" "quantam-app-war" {
+  bucket = aws_s3_bucket.quantam-app-war
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+
+}
